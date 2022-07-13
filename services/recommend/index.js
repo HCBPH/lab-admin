@@ -71,7 +71,7 @@ async function editRecommend(recommend) {
 
 async function createRecommend(recommend) {
 
-    let sql = "INSERT INTO lab.RECOMMEND_INFO (publisher, cover, title, brief, content, picture, tag, background) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+    let sql = "INSERT INTO RECOMMEND_INFO (publisher, cover, title, brief, content, picture, tag, background) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
     
     try {
         const result = await queryDB(sql, [recommend.publisher, recommend.cover, recommend.title, recommend.brief, recommend.content, recommend.picture, recommend.tag, recommend.background])

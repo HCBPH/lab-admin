@@ -42,7 +42,7 @@ async function findStorePage(page, size){
 
 async function createStore(store){
 
-    let sql = "INSERT INTO lab.STORE_INFO(name, cover, background, introduce, detail, picture, score, consume, location, address, business_hours, tel, `style`, `type`, update_time, spare)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?)"
+    let sql = "INSERT INTO STORE_INFO(name, cover, background, introduce, detail, picture, score, consume, location, address, business_hours, tel, `style`, `type`, update_time, spare)VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?)"
 
     try {
         const result = await queryDB(sql, [
@@ -64,7 +64,7 @@ async function createStore(store){
 
 async function editStore(store){
 
-    let sql = "UPDATE lab.STORE_INFO SET name=?, cover=?, background=?, introduce=?, detail=?, picture=?, score=?, consume=?, location=?, address=?, business_hours=?, tel=?, `style`=?, `type`=?, update_time=now(), spare=? WHERE id=?"
+    let sql = "UPDATE STORE_INFO SET name=?, cover=?, background=?, introduce=?, detail=?, picture=?, score=?, consume=?, location=?, address=?, business_hours=?, tel=?, `style`=?, `type`=?, update_time=now(), spare=? WHERE id=?"
 
     try {
         const result = await queryDB(sql, [
