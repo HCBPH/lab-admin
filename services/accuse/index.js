@@ -204,6 +204,32 @@ async function deleteAccuse(aid){
 
 
 
+async function recoverAccuse(aid){
+
+    aid = parseInt(aid)
+
+    let sql = "update ACCUSE_INFO set is_delete=0 where id=?"
+
+    try {
+
+        const result = await queryDB(sql, [aid])
+
+        if(result.changedRows === 0){
+            console.log("aaaaaaaaaa")
+            return await Promise.reject("请勿重复操作")
+        }else{
+            return await Promise.resolve("成功恢复投诉")
+        }
+
+
+    }catch(e){
+        return await Promise.reject(e.errorType||e)
+    }
+
+}
+
+
+
 module.exports = {
     findOneAccuse,
     findProcessedAccusePage,
@@ -213,5 +239,6 @@ module.exports = {
     findAccuseByAccused,
     findAccuseByCid,
     processAccuse,
-    deleteAccuse
+    deleteAccuse,
+    recoverAccuse
 }

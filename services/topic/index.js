@@ -71,7 +71,7 @@ async function createTopic(topic) {
         if(result.affectedRows===0){
             return await Promise.reject("创建失败")
         }else{
-            return await Promise.resolve("创建成功")
+            return await Promise.resolve(result.insertId)
         }
     }catch (e) {
         return await Promise.reject(e.errorType||e)
@@ -100,12 +100,34 @@ async function deleteTopic(tid) {
 }
 
 
+
+async function recoverTopic(tid) {
+
+    tid = parseInt(tid)
+
+    let sql = "update TOPIC_INFO set is_delete=0 where id=?"
+    
+    try {
+        const result = await queryDB(sql, [tid])
+        if(result.changedRows === 0){
+            return await Promise.reject("请勿重复操作")
+        }else{
+            return await Promise.resolve("成功恢复记录")
+        }
+    }catch (e) {
+        return await Promise.reject(e.errorType||e)
+    }
+
+}
+
+
 module.exports = {
     findOneTopic,
     findTopicPage,
     createTopic,
     editTopic,
-    deleteTopic
+    deleteTopic,
+    recoverTopic
 }
 
 

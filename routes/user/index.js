@@ -61,6 +61,17 @@ router.get("/Delete", (req, res, next)=>{
     })
 })
 
+router.get("/Recover", (req, res, next)=>{
+
+    const uid = req.query.uid;
+
+    userMapper.recoverUser(uid).then((result)=>{
+        new Result([], result).success(res)
+    }).catch((error)=>{
+        new Result([], error).fail(res)
+    })
+})
+
 
 
 

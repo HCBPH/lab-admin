@@ -53,7 +53,7 @@ router.post("/CreateRecommend", (req, res, next)=>{
 
     const recommend = req.body
     mapper.createRecommend(recommend).then((result)=>{
-        new Result([], result).success(res)
+        new Result({"id":result}, "创建成功").success(res)
     }).catch((error)=>{
         new Result([], error).fail(res)
     })
@@ -65,6 +65,17 @@ router.get("/Delete", (req, res, next)=>{
 
     const {rid} = req.query
     mapper.deleteRecommend(rid).then((result)=>{
+        new Result([], result).success(res)
+    }).catch((error)=>{
+        new Result([], error).fail(res)
+    })
+
+})
+
+router.get("/Recover", (req, res, next)=>{
+
+    const {rid} = req.query
+    mapper.recoverRecommend(rid).then((result)=>{
         new Result([], result).success(res)
     }).catch((error)=>{
         new Result([], error).fail(res)

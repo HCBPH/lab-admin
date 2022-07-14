@@ -128,8 +128,35 @@ async function deleteUser(uid){
     }catch(error){
         return await Promise.reject(error.errorType||error)
     }
-} 
+}
 
 
-module.exports = {findUserByID, findUsersByPage, editUserState, editUserInfo, checkUser, deleteUser}
+async function recoverUser(uid){
+    uid = parseInt(uid)
+
+    sql = "update USER set is_delete=0 where id=?"
+
+    try {
+        const result = await queryDB(sql, [uid])
+        if(result.changedRows === 0){
+            return await Promise.reject("请勿重复操作")
+        }else{
+            return await Promise.resolve("成功恢复用户")
+        }
+    }catch(error){
+        return await Promise.reject(error.errorType||error)
+    }
+}
+
+
+module.exports = {
+    findUserByID,
+    findUsersByPage,
+    editUserState,
+    editUserInfo,
+    checkUser,
+    deleteUser,
+    recoverUser
+}
+
 

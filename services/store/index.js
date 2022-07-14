@@ -51,10 +51,12 @@ async function createStore(store){
             store.address, store.business_hours, store.tel,
             store.style, store.type, store.spare
         ])
+        console.log(result)
         if(result.affectedRows === 0){
+            console.log(result)
             return await Promise.reject("创建失败");
         }else {
-            return await Promise.resolve("创建成功")
+            return await Promise.resolve(result.insertId)
         }
     }catch (error) {
         return await Promise.reject(error.errorType || error)
@@ -105,13 +107,34 @@ async function deleteStore(sid) {
 }
 
 
+async function recoverStore(sid) {
+
+    sid = parseInt(sid)
+
+    let sql = "update STORE_INFO set is_delete=0 where id=?"
+    
+    try {
+        const result = await queryDB(sql, [sid])
+        if(result.changedRows === 0){
+            return await Promise.reject("请勿重复操作")
+        }else{
+            return await Promise.resolve("成功恢复记录")
+        }
+    }catch (e) {
+        return await Promise.reject(e.errorType||e)
+    }
+
+}
+
+
 
 module.exports = {
     findOneStore,
     findStorePage,
     createStore,
     editStore,
-    deleteStore
+    deleteStore,
+    recoverStore
 }
 
 

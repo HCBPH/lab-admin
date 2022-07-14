@@ -79,7 +79,7 @@ async function createRecommend(recommend) {
         if(result.affectedRows===0){
             return await Promise.reject("创建失败")
         }else{
-            return await Promise.resolve("创建成功")
+            return await Promise.resolve(result.insertId)
         }
     }catch (e) {
         return await Promise.reject(e.errorType||e)
@@ -109,10 +109,32 @@ async function deleteRecommend(rid) {
 
 
 
+async function recoverRecommend(rid) {
+
+    rid = parseInt(rid)
+
+    let sql = "update RECOMMEND_INFO set is_delete=0 where id=?"
+    
+    try {
+        const result = await queryDB(sql, [rid])
+        if(result.changedRows === 0){
+            return await Promise.reject("请勿重复操作")
+        }else{
+            return await Promise.resolve("成功恢复记录")
+        }
+    }catch (e) {
+        return await Promise.reject(e.errorType||e)
+    }
+
+}
+
+
+
 module.exports = {
     findOneRecommend,
     findRecommendPage,
     createRecommend,
     editRecommend,
-    deleteRecommend
+    deleteRecommend,
+    recoverRecommend
 }

@@ -47,7 +47,7 @@ router.post("/CreateTopic", (req, res, next)=>{
 
     const topic = req.body
     topicMapper.createTopic(topic).then((result)=>{
-        new Result([], result).success(res)
+        new Result({"id":result}, "创建成功").success(res)
     }).catch((error)=>{
         new Result([], error).fail(res)
     })
@@ -59,6 +59,18 @@ router.get("/Delete", (req, res, next)=>{
 
     const {tid} = req.query
     topicMapper.deleteTopic(tid).then((result)=>{
+        new Result([], result).success(res)
+    }).catch((error)=>{
+        new Result([], error).fail(res)
+    })
+
+})
+
+
+router.get("/Recover", (req, res, next)=>{
+
+    const {tid} = req.query
+    topicMapper.recoverTopic(tid).then((result)=>{
         new Result([], result).success(res)
     }).catch((error)=>{
         new Result([], error).fail(res)

@@ -170,4 +170,18 @@ router.get("/Delete", (req, res, next)=>{
 
 })
 
+
+router.get("/Recover", (req, res, next)=>{
+
+    const {aid} = req.query
+
+    accuseMapper.recoverAccuse(aid).then((result)=>{
+        new Result([], result).success(res)
+    }).catch((error)=>{
+        console.log(error)
+        new Result([], error).fail(res)
+    })
+
+})
+
 module.exports = router

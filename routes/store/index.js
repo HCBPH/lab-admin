@@ -30,7 +30,7 @@ router.post("/CreateStore", (req, res, next)=>{
     const store = req.body
 
     mapper.createStore(store).then((result)=>{
-        new Result([], result).success(res)
+        new Result({"id":result}, "创建成功").success(res)
     }).catch((error)=>{
         new Result([], error).fail(res)
     })
@@ -54,6 +54,16 @@ router.get("/Delete", (req, res, next)=>{
     const {sid} = req.query
 
     mapper.deleteStore(sid).then((result)=>{
+        new Result([], result).success(res)
+    }).catch((error)=>{
+        new Result([], error).fail(res)
+    })
+})
+
+router.get("/Recover", (req, res, next)=>{
+    const {sid} = req.query
+
+    mapper.recoverStore(sid).then((result)=>{
         new Result([], result).success(res)
     }).catch((error)=>{
         new Result([], error).fail(res)
