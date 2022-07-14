@@ -5,7 +5,7 @@ async function findOneTopic(tid) {
 
     tid = parseInt(tid)
 
-    let sql = "select * from TOPIC_INFO where id=? and is_delete=0"
+    let sql = "select * from TOPIC_INFO where id=?"
     
     try {
         const result = await queryDB(sql, [tid])
@@ -44,7 +44,7 @@ async function findTopicPage(page, size) {
 
 async function editTopic(topic) {
 
-    let sql = "UPDATE TOPIC_INFO SET publisher=?, cover=?, title=?, brief=?, content=?, picture=?, tag=?, background=?, `time`=now() WHERE id=? and is_delete=0"
+    let sql = "UPDATE TOPIC_INFO SET publisher=?, cover=?, title=?, brief=?, content=?, picture=?, tag=?, background=?, `time`=now() WHERE id=?"
     
     try {
         const result = await queryDB(sql, [topic.publisher, topic.cover, topic.title, topic.brief, topic.content, topic.picture, topic.tag, topic.background, parseInt(topic.id)])

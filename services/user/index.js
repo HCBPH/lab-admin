@@ -2,7 +2,7 @@ const {queryDB} = require("../../config/db")
 
 
 async function checkUser(uid){
-    let sql = "select id,username from USER where id=? and is_delete=0"
+    let sql = "select id,username from USER where id=?"
     try {
         const result = await queryDB(sql, [uid])
         // console.log(result)
@@ -13,7 +13,7 @@ async function checkUser(uid){
 }
 
 async function editUserInfo(userInfo){
-    let sql = "update USER set name=?,email=?,tel=?,birthday=?,sex=? where id=? and is_delete=0"
+    let sql = "update USER set name=?,email=?,tel=?,birthday=?,sex=? where id=?"
 
     // 先判断user是否存在
     let exists = await checkUser(userInfo.uid).then((res)=>{
@@ -51,7 +51,7 @@ async function editUserInfo(userInfo){
 
 async function editUserState(uid, state){
 
-    let sql = "update USER set state=? where id=? and is_delete=0"
+    let sql = "update USER set state=? where id=?"
 
     // 先判断user是否存在
     let exists = await checkUser(uid).then((res)=>{
@@ -85,7 +85,7 @@ async function editUserState(uid, state){
 }
 
 async function findUserByID(uid){
-    sql = "select id,username,name,email,tel,birthday,sex,create_time,last_login_time,profile,state from USER where id=? and is_delete=0"
+    sql = "select id,username,name,email,tel,birthday,sex,create_time,last_login_time,profile,state from USER where id=?"
 
     try {
         const result = await queryDB(sql, [uid])

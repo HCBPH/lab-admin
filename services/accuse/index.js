@@ -6,7 +6,7 @@ const {queryDB} = require("../../config/db")
 async function findOneAccuse(aid) {
     try {
 
-        let sql = "select * from ACCUSE_INFO where id=? and is_delete=0"
+        let sql = "select * from ACCUSE_INFO where id=?"
 
         const result = await queryDB(sql, [aid])
 
@@ -29,7 +29,7 @@ async function findAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where is_delete=0 order by id desc limit ?, ?"
+        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [(page-1)*size, size])
 
@@ -52,7 +52,7 @@ async function findProcessedAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state!=0 and is_delete=0 order by id desc limit ?, ?"
+        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state!=0 and order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [page, size])
 
@@ -75,7 +75,7 @@ async function findUnprocessedAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state=0 and is_delete=0 order by id desc limit ?, ?"
+        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state=0 order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [page, size])
 
@@ -95,7 +95,7 @@ async function findUnprocessedAccusePage(page, size) {
 async function findAccuseByAccused(username) {
     try {
 
-        let sql = "select * from ACCUSE_INFO where accused=? and is_delete=0"
+        let sql = "select * from ACCUSE_INFO where accused=?"
 
         const result = await queryDB(sql, [username])
 
@@ -116,7 +116,7 @@ async function findAccuseByAccuser(username) {
     try {
         // console.log(username)
 
-        let sql = "select * from ACCUSE_INFO where accuser=? and is_delete=0"
+        let sql = "select * from ACCUSE_INFO where accuser=?"
 
         const result = await queryDB(sql, [username])
 
@@ -138,7 +138,7 @@ async function findAccuseByCid(cid) {
 
         cid = parseInt(cid)
 
-        let sql = "select * from ACCUSE_INFO where cid=? and is_delete=0"
+        let sql = "select * from ACCUSE_INFO where cid=?"
 
         const result = await queryDB(sql, [cid])
 
@@ -161,7 +161,7 @@ async function processAccuse(aid, state, feedback) {
         aid = parseInt(aid)
         state = parseInt(state)
 
-        let sql = "update ACCUSE_INFO set state=?,feedback=? where id=? and is_delete=0"
+        let sql = "update ACCUSE_INFO set state=?,feedback=? where id=?"
 
         const result = await queryDB(sql, [state, feedback, aid])
         

@@ -5,7 +5,7 @@ async function findOneRecommend(rid){
 
     rid = parseInt(rid)
 
-    let sql = "select * from RECOMMEND_INFO where id=? and is_delete=0"
+    let sql = "select * from RECOMMEND_INFO where id=?"
 
     try {
         
@@ -52,7 +52,7 @@ async function findRecommendPage(page, size){
 
 async function editRecommend(recommend) {
 
-    let sql = "UPDATE RECOMMEND_INFO SET publisher=?, cover=?, title=?, brief=?, content=?, picture=?, tag=?, background=?, `time`=now() WHERE id=? and is_delete=0"
+    let sql = "UPDATE RECOMMEND_INFO SET publisher=?, cover=?, title=?, brief=?, content=?, picture=?, tag=?, background=?, `time`=now() WHERE id=?"
     
     try {
         const result = await queryDB(sql, [recommend.publisher, recommend.cover, recommend.title, recommend.brief, recommend.content, recommend.picture, recommend.tag, recommend.background, parseInt(recommend.id)])
