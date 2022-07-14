@@ -63,7 +63,7 @@ async function editTopic(topic) {
 
 async function createTopic(topic) {
 
-    let sql = "INSERT INTO lab.TOPIC_INFO (publisher, cover, title, brief, content, picture, tag, background) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+    let sql = "INSERT INTO TOPIC_INFO (publisher, cover, title, brief, content, picture, tag, background) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
     
     try {
         const result = await queryDB(sql, [topic.publisher, topic.cover, topic.title, topic.brief, topic.content, topic.picture, topic.tag, topic.background])

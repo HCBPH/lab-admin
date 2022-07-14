@@ -85,7 +85,7 @@ async function editUserState(uid, state){
 }
 
 async function findUserByID(uid){
-    sql = "select id,username,name,email,tel,birthday,sex,create_time,last_login_time,profile from USER where id=? and state=1 and is_delete=0"
+    sql = "select id,username,name,email,tel,birthday,sex,create_time,last_login_time,profile,state from USER where id=? and is_delete=0"
 
     try {
         const result = await queryDB(sql, [uid])
@@ -100,7 +100,7 @@ async function findUsersByPage(page, size, sort){
     page = parseInt(page)
     size = parseInt(size)
 
-    sql = "select id,username,name,email,tel,birthday,sex,create_time,last_login_time,profile from USER where state=1 and is_delete=0 order by id "+sort+" limit ?, ?"
+    sql = "select id,username,name,email,tel,birthday,sex,create_time,last_login_time,profile,state from USER where is_delete=0 order by id "+sort+" limit ?, ?"
 
     try {
         const result = await queryDB(sql, [(page-1)*size, size])
