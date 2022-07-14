@@ -29,7 +29,7 @@ async function findAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where order by id desc limit ?, ?"
+        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [(page-1)*size, size])
 
@@ -52,7 +52,7 @@ async function findProcessedAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state!=0 and order by id desc limit ?, ?"
+        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state!=0 order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [page, size])
 
