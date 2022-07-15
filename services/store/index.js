@@ -5,7 +5,7 @@ async function findOneStore(sid){
 
     sid = parseInt(sid)
 
-    let sql = "select * from STORE_INFO where id=?"
+    let sql = "select * from STORE_INFO where id=? and is_delete=0"
 
     try {
         const result = await queryDB(sql, [sid])
@@ -25,7 +25,7 @@ async function findStorePage(page, size){
     page = parseInt(page)
     size = parseInt(size)
 
-    let sql = "select * from STORE_INFO order by id desc limit ?,?"
+    let sql = "select * from STORE_INFO where is_delete=0 order by id desc limit ?,?"
 
     try {
         const result = await queryDB(sql, [(page-1)*size, size])
