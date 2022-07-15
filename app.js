@@ -20,7 +20,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cors())
+
+var corsOptions = {
+  origin: 'http://1.117.74.41',
+  optionsSuccessStatus: 200,
+  credentials: true
+}
+app.use(cors(corsOptions))
 
 app.use('/', indexRouter);
 
