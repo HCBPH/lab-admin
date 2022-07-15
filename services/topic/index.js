@@ -26,7 +26,7 @@ async function findTopicPage(page, size) {
     page = parseInt(page)
     size = parseInt(size)
 
-    let sql = "select * from TOPIC_INFO where is_delete=0 order by id desc limit ?,?"
+    let sql = "select * from TOPIC_INFO order by id desc limit ?,?"
     
     try {
         const result = await queryDB(sql, [(page-1)*size, size])

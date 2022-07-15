@@ -52,7 +52,7 @@ async function findProcessedAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state!=0 order by id desc limit ?, ?"
+        let sql = "select * from ACCUSE_INFO where state!=0 order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [page, size])
 
@@ -75,7 +75,7 @@ async function findUnprocessedAccusePage(page, size) {
         page = parseInt(page)
         size = parseInt(size)
 
-        let sql = "select id, time, type, accuser, accused, cid, reason, state, feedback from ACCUSE_INFO where state=0 order by id desc limit ?, ?"
+        let sql = "select * from ACCUSE_INFO where state=0 order by id desc limit ?, ?"
 
         const result = await queryDB(sql, [page, size])
 

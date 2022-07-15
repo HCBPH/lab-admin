@@ -29,7 +29,7 @@ async function findRecommendPage(page, size){
     page = parseInt(page)
     size = parseInt(size)
 
-    let sql = "select * from RECOMMEND_INFO where is_delete=0 order by id desc limit ?,?"
+    let sql = "select * from RECOMMEND_INFO order by id desc limit ?,?"
 
     try {
         
